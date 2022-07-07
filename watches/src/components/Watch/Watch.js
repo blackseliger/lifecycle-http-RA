@@ -1,10 +1,10 @@
-
+import iconDelete from '../../assets/icons/handleDelete.svg'
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import './Watch.css'
-
+ 
 function Watch({ handleRemove, ...watch }) {
-    const { time, name } = watch;
+    const { time, name, id } = watch;
     const [zone, setZone] = useState(moment().utcOffset(0));
     // важно выставить дефолтное значение, и не стоит определяться на state или props. Они выставляются в асинхронном порядке и вообще это очередь. 
     // дефолтные 0 спасает ситуацию
@@ -41,6 +41,9 @@ function Watch({ handleRemove, ...watch }) {
         <div>
             <div>{name}</div>
             <div>{zone.format('HH:mm:ss')}</div>
+            <div className="table__icon">
+                <img src={iconDelete} onClick={() => handleRemove(id)} alt="delete"/>
+            </div>
             <div className="watch">
                 <div className="hourhand" style={{ transform: hours(zone) }}></div>
                 <div className="minutehand" style={{transform: minutes(zone)}}></div>
